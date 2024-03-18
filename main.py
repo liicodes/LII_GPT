@@ -19,10 +19,13 @@ def get_quote():
 
 # Function to fetch a joke from JokeAPI
 def get_joke():
-    joke_response = requests.get("https://v2.jokeapi.dev/joke/Programming?blacklistFlags=religious,political,racist,sexist,explicit")
+    joke_response = requests.get("https://v2.jokeapi.dev/joke/Programming?blacklistFlags=religious,political,racist,sexist,explicit&type=twopart")
     data = joke_response.json()
-    joke = data["setup"] + " -" + data["delivery"]
-    return joke
+    if "setup" in data:
+        joke = data["setup"] + " -" + data["delivery"]
+        return joke
+    else:
+        print("Couldn't fetch joke, please try again!"
 
 # Event: Bot is ready
 @bot.event
